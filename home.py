@@ -1,9 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
-import os, sys
+import os
 
-lib_path = os.path.dirname(__file__)
-sys.path.append(lib_path)
 from vscomputer import vscomputer
 from vsplayer import client
 

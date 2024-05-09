@@ -20,7 +20,6 @@ class VsComputer:
 
         self.create_widgets()
 
-        # Nếu người chơi chọn O, máy đi trước
         if self.player_symbol == "O":
             self.random_first_move()
 
@@ -28,7 +27,7 @@ class VsComputer:
         import home
 
         self.master.withdraw()
-        home.main()
+        home.__name__ = "__main__"
 
     def set_turn(self, turn):
         self.turn = turn
@@ -55,7 +54,6 @@ class VsComputer:
         # Cập nhật lại lượt đi khi reset
         self.set_turn("X")
 
-        # Nếu người chơi chọn O, máy đi trước
         if self.player_symbol == "O":
             self.random_first_move()
 
@@ -138,7 +136,7 @@ class VsComputer:
         result = self.check_winner(self.computer_symbol, board)
         if result:
             return 1
-        if " " not in board:  # or depth == 5:  # MAX_DEPTH = 5
+        if " " not in board:
             return 0
 
         if is_maximizing:

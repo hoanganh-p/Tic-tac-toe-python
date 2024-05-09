@@ -11,7 +11,7 @@ class Client:
         self.master = master
         self.master.title("Tic Tac Toe")
 
-        self.symbol = "O"
+        self.symbol = "X"
         self.board = [" " for _ in range(9)]
         self.difficulty = "Medium"
         self.turn = "X"
@@ -21,11 +21,14 @@ class Client:
 
         self.create_widgets()
 
-        self.host = "localhost"  # Địa chỉ IP
+        self.host = "192.168.56.1"
         self.port = 4444
-        # self.nickname = self.get_nickname()
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_socket.connect((self.host, self.port))
+
+        # Thread nhận dữ liệu
+        receive_thread = threading.Thread(target=self.receive_data)
+        receive_thread.start()
 
     def back(self):
         import home
@@ -67,8 +70,6 @@ class Client:
             color = "blue" if symbol == "X" else "red"
             self.broad_buttons[index].configure(text=symbol, fg=color)
             self.board[index] = symbol
-            turn = "O" if symbol == "X" else "X"
-            self.set_turn(turn)
 
             if self.check_winner(symbol):
                 self.highlight_winning(symbol)
@@ -83,6 +84,9 @@ class Client:
                 messagebox.showinfo("Draw!", "It's a draw!")
                 self.set_win_count("Draw")
                 self.reset_board()
+            else:
+                turn = "O" if symbol == "X" else "X"
+                self.set_turn(turn)
 
     def check_winner(self, player, board=None):
         if board is None:
@@ -137,14 +141,15 @@ class Client:
     def receive_data(self):
         # Nhận dữ liệu từ server để xác định ký tự của client là "X" hay "O"
         self.symbol = self.client_socket.recv(1024).decode()
-        if self.symbol == "X":
-            self.choice_label.config(text="Symbol: " + self.symbol)
-            self.turn_label.config(text="Your turn")
+        if self.symbol == "O":
+            self.set_symbol("O")
+            self.set_turn("X")
 
         while True:
             data = self.client_socket.recv(1024).decode()
             if not data:
                 break
+            # data = data.decode()
             if data == "SwapSymbol":
                 # Nếu nhận được yêu cầu thay đổi ký tự từ server
                 confirm = messagebox.askyesno(
@@ -185,10 +190,9 @@ class Client:
         self.back_button.pack(anchor="nw", padx=10, pady=10)
 
         # Label hiển thị lượt đi
-        txt = "Your turn" if self.symbol == self.turn else "Opponent's turn"
-        self.turn_label = tk.Label(self.master, text=txt, font=("Arial", 20))
+        # txt = "Your turn" if self.symbol == "X" else "Opponent's turn"
+        self.turn_label = tk.Label(self.master, text="Your turn", font=("Arial", 20))
         self.turn_label.pack(anchor="w", fill="x", padx=(0, 270), pady=(30, 10))
-        # self.turn_label.place(anchor="center", relx=0.31, rely=0.2, relheight= 0.3, relwidth=0.3)
 
         # Mid frame
         self.mid_frame = tk.Frame(self.master)
@@ -277,8 +281,5 @@ if __name__ == "__main__":
     )
     root.tk.call("source", path)
     style.theme_use("forest-dark")
-
-    receive_thread = threading.Thread(target=client.receive_data)
-    receive_thread.start()
 
     root.mainloop()
