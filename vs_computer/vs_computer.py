@@ -97,9 +97,6 @@ class VsComputer:
         if self.difficulty == "Easy":
             index = self.get_random_move()
         elif self.difficulty == "Medium":
-            # index = (
-            #     self.get_random_move() if random.randint(0, 1) else self.get_best_move()
-            # )
             index = self.get_medium_move()
         else:  # Hard
             index = self.get_best_move()
@@ -258,7 +255,7 @@ class VsComputer:
 
     def create_widgets(self):
         # Nút back
-        icon = self.create_icon(r"imgs\back-icon.png")
+        icon = self.create_icon(r"imgs/back-icon.png")
         self.back_button = ttk.Button(
             self.master, image=icon, style="Accent.TButton", command=self.back
         )
@@ -286,7 +283,7 @@ class VsComputer:
             self.top_frame, text="Symbol: " + self.player_symbol, font=("Arial", 12)
         )
         self.symbol_label.grid(row=0, column=2, padx=(220, 25), sticky="nsew")
-        icon = self.create_icon(r"imgs\swap-icon.png")
+        icon = self.create_icon(r"imgs/swap-icon.png")
         self.swap_symbol_button = ttk.Button(
             self.top_frame,
             image=icon,

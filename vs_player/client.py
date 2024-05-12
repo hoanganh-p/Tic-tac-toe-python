@@ -238,7 +238,7 @@ class Client:
 
     def create_widgets(self):
         # Nút back
-        icon = self.create_icon(r"imgs\back-icon.png")
+        icon = self.create_icon(r"imgs/back-icon.png")
         self.back_button = ttk.Button(
             self.master, image=icon, style="Accent.TButton", command=self.back
         )
@@ -284,7 +284,7 @@ class Client:
         )
         self.choice_label.grid(row=0, column=1, sticky="nsew")
         # Nút swap phe
-        icon = self.create_icon(r"imgs\swap-icon.png")
+        icon = self.create_icon(r"imgs/swap-icon.png")
         self.swap_symbol_button = ttk.Button(
             self.choice_frame,
             image=icon,
