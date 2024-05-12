@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import os
 
-dirname = os.path.join(os.getcwd(), "Tic-tac-toe-python")
+dirname = os.path.dirname(__file__)
 import sys
 
 sys.path.append(dirname)

@@ -5,7 +5,7 @@ import socket
 import threading
 from PIL import Image, ImageTk
 
-dirname = os.path.join(os.getcwd(), "Tic-tac-toe-python")
+dirname = os.path.dirname(os.path.dirname(__file__))
 import sys
 
 sys.path.append(dirname)
