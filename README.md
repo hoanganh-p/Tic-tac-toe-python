@@ -18,7 +18,7 @@ This is a simple implementation of the Tic-tac-toe game in Python.
 
 ### 1. Clone the repository:
 ```bash
-https://github.com/hoanganh-p/Tic-tac-toe-python.git
+git clone https://github.com/hoanganh-p/Tic-tac-toe-python.git
 ```
 ### 2. Navigate to the project directory:
 ```bash
