@@ -139,13 +139,13 @@ class VsComputer:
     def evaluate_move(self, index):
         player = self.player_symbol
         computer = self.computer_symbol
-        self.board[index] = computer
 
+        self.board[index] = computer
         if self.check_winner(computer):
             self.board[index] = " "
             return 2
+        
         self.board[index] = player
-
         if self.check_winner(player):
             self.board[index] = " "
             return 1

@@ -18,7 +18,6 @@ class Client:
 
         self.symbol = "X"
         self.board = [" " for _ in range(9)]
-        self.difficulty = "Medium"
         self.turn = "X"
         self.player1_win_count = 0
         self.player2_win_count = 0
